@@ -6,9 +6,17 @@ exports.up = function(knex) {
       tbl.text("description")
       tbl.boolean("completed").defaultTo(false)
   })
+
+  .createTable("resources", (tbl) => {
+    tbl.increments()
+    tbl.text("name",220).unique().notNullable()
+    tbl.text("description")
+  })
+
 };
 
 exports.down = function(knex) {
   return knex.schema
+    .dropTableIfExists("resources")
     .dropTableIfExists("projects")
 };

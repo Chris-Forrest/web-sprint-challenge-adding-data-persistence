@@ -40,7 +40,26 @@ router.post("/resources", async(req,res,next) => {
     }catch(err){
         next(err)
     }
-})
+});
+
+router.get("/tasks", async (req,res,next) => {
+    try{
+        const tasks = await db.getTasks()
+        res.status(200).json(tasks)
+    }catch(err){
+        next(err)
+    }
+});
+
+router.post("/tasks", async (req,res,next) => {
+    try{
+        const task = req.body
+        const taskId = await db.addTask(task)
+        res.status(201).json(taskId)
+    }catch(err){
+        next(err)
+    }
+} )
 
 
 

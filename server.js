@@ -1,11 +1,12 @@
 const express = require("express");
 
-
 const server = express();
+
+const projectsRouter = require("./models-routers/routers");
 
 server.use(express.json());
 server.use(logger)
-
+server.use("/api/projects", projectsRouter);
 
 
 function logger(req,res,next){

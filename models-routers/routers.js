@@ -23,6 +23,25 @@ router.post("/", async(req,res,next) => {
     }
 });
 
+router.get("/resources", async(req,res,next) => {
+    try{
+        const resources = await db.getResources()
+        res.status(200).json(resources)
+    }catch(err){
+        next(err)
+    }
+});
+
+router.post("/resources", async(req,res,next) => {
+    try{
+        const resource = req.body
+        const resourceId = await db.addResource(resource)
+        res.status(201).json(resourceId)
+    }catch(err){
+        next(err)
+    }
+})
+
 
 
 module.exports = router;

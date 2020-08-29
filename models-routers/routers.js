@@ -13,4 +13,16 @@ router.get("/", async(req,res,next) => {
     }
 });
 
+router.post("/", async(req,res,next) => {
+    try{
+        const project = req.body
+        const projectId = await db.addProject(project)
+        res.status(201).json(projectId)
+    }catch(err){
+        next(err)
+    }
+});
+
+
+
 module.exports = router;
